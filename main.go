@@ -1,0 +1,35 @@
+package main
+
+import (
+	"fmt"
+	"os"
+	"strings"
+
+	"github.com/destinio/gomoji/data"
+)
+
+func main() {
+	args := os.Args
+
+	if len(args) < 2 {
+		fmt.Println("Please provide a search term")
+		return
+	}
+
+	input := os.Args[1]
+
+	emojis, err := data.FindEmojisByTag(strings.ToLower(input))
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	if len(emojis) == 0 {
+		fmt.Println("No emojis found")
+		return
+	}
+
+	for _, emoji := range emojis {
+		fmt.Println(emoji.Emoji, emoji.Unicode, emoji.Shortcode)
+	}
+}
