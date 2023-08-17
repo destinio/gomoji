@@ -15,30 +15,45 @@ make install
 ## Usage
 
 ```bash
+# Find all emojis that match the search term
+# This only return the default emoji
 gomoji [search term]
+
+# Find all emojis that match the search term
+# This returns all emojis including skin tones
+gomoji [search term] --all
+
+## Or simply
+
+gomoji [search term] -a
 ```
 
 ## Examples
 
 ```bash
-gomoji smile
+gomoji golf
+🏌 U+1F3CC :person_golfing:
+⛳ U+26F3 :golf:
 
-😁 U+1F601 :grin:
-😃 U+1F603 :smiley:
-😄 U+1F604 :grin:
-😅 U+1F605 :sweat_smile:
-😆 U+1F606 :laughing:
-😊 U+1F60A :blush:
-😋 U+1F60B :yum:
-😎 U+1F60E :sunglasses:
-😍 U+1F60D :heart_eyes:
-😙 U+1F619 :kissing_smiling_eyes:
-☺ U+263A :relaxed:
-🙂 U+1F642 :slight_smile:
-😇 U+1F607 :innocent:
-😈 U+1F608 :smiling_imp:
-😺 U+1F63A :smiley_cat:
-😸 U+1F638 :smile_cat:
-😻 U+1F63B :heart_eyes_cat:
-😼 U+1F63C :smirk_cat:
+gomoji golf -a
+
+🏌 U+1F3CC :person_golfing:
+🏌🏻 U+1F3CC U+1F3FB :person_golfing_tone1:
+🏌🏼 U+1F3CC U+1F3FC :person_golfing_tone2:
+🏌🏽 U+1F3CC U+1F3FD :person_golfing_tone3:
+🏌🏾 U+1F3CC U+1F3FE :person_golfing_tone4:
+🏌🏿 U+1F3CC U+1F3FF :person_golfing_tone5:
+🏌️‍♂️ U+1F3CC U+FE0F U+200D U+2642 U+FE0F :man_golfing:
+🏌🏻‍♂️ U+1F3CC U+1F3FB U+200D U+2642 U+FE0F :man_golfing_tone1:
+🏌🏼‍♂️ U+1F3CC U+1F3FC U+200D U+2642 U+FE0F :man_golfing_tone2:
+🏌🏽‍♂️ U+1F3CC U+1F3FD U+200D U+2642 U+FE0F :man_golfing_tone3:
+🏌🏾‍♂️ U+1F3CC U+1F3FE U+200D U+2642 U+FE0F :man_golfing_tone4:
+🏌🏿‍♂️ U+1F3CC U+1F3FF U+200D U+2642 U+FE0F :man_golfing_tone5:
+🏌️‍♀️ U+1F3CC U+FE0F U+200D U+2640 U+FE0F :woman_golfing:
+🏌🏻‍♀️ U+1F3CC U+1F3FB U+200D U+2640 U+FE0F :woman_golfing_tone1:
+🏌🏼‍♀️ U+1F3CC U+1F3FC U+200D U+2640 U+FE0F :woman_golfing_tone2:
+🏌🏽‍♀️ U+1F3CC U+1F3FD U+200D U+2640 U+FE0F :woman_golfing_tone3:
+🏌🏾‍♀️ U+1F3CC U+1F3FE U+200D U+2640 U+FE0F :woman_golfing_tone4:
+🏌🏿‍♀️ U+1F3CC U+1F3FF U+200D U+2640 U+FE0F :woman_golfing_tone5:
+⛳ U+26F3 :golf:
 ```
