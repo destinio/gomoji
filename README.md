@@ -20,7 +20,7 @@ make install
 gomoji [search term]
 
 # Find all emojis that match the search term
-# This returns all emojis including skin tones
+# This returns all emojis including genders and skin tones
 gomoji [search term] --all
 
 ## Or simply
