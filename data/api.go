@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 )
 
 type Emoji struct {
@@ -37,6 +38,7 @@ func GetEmojis() ([]Emoji, error) {
 	var emojis []Emoji
 
 	decoder := json.NewDecoder(file)
+
 	err = decoder.Decode(&emojis)
 	if err != nil {
 		log.Fatal(err)
@@ -46,7 +48,17 @@ func GetEmojis() ([]Emoji, error) {
 	return emojis, nil
 }
 
-func FindEmojisByTag(tag string) ([]Emoji, error) {
+type Options struct {
+	All bool
+}
+
+func FindEmojisByTag(tag string, opts ...*Options) ([]Emoji, error) {
+	defaultAll := false
+
+	if len(opts) > 0 {
+		defaultAll = opts[0].All
+	}
+
 	emojis, err := GetEmojis()
 	if err != nil {
 		log.Fatal(err)
@@ -56,9 +68,21 @@ func FindEmojisByTag(tag string) ([]Emoji, error) {
 	var foundEmojis []Emoji
 
 	for _, emoji := range emojis {
-		for _, emojiTag := range emoji.Tags {
-			if emojiTag == tag {
-				foundEmojis = append(foundEmojis, emoji)
+		uniCount := len(strings.Split(emoji.Unicode, " "))
+
+		if defaultAll {
+			for _, emojitag := range emoji.Tags {
+				if emojitag == tag {
+					foundEmojis = append(foundEmojis, emoji)
+				}
+			}
+		} else {
+			if uniCount == 1 {
+				for _, emojitag := range emoji.Tags {
+					if emojitag == tag {
+						foundEmojis = append(foundEmojis, emoji)
+					}
+				}
 			}
 		}
 	}

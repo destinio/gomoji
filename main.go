@@ -18,7 +18,17 @@ func main() {
 
 	input := os.Args[1]
 
-	emojis, err := data.FindEmojisByTag(strings.ToLower(input))
+	var flag bool
+
+	if len(args) > 2 {
+		if args[2] == "-a" || args[2] == "--all" {
+			flag = true
+		}
+	} else {
+		flag = false
+	}
+
+	emojis, err := data.FindEmojisByTag(strings.ToLower(input), &data.Options{All: flag})
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
