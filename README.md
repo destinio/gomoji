@@ -32,6 +32,7 @@ gomoji [search term] -a
 
 ```bash
 gomoji golf
+
 🏌 U+1F3CC :person_golfing:
 ⛳ U+26F3 :golf:
 
