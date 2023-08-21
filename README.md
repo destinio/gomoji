@@ -21,11 +21,7 @@ gomoji [search term]
 
 # Find all emojis that match the search term
 # This returns all emojis including genders and skin tones
-gomoji [search term] --all
-
-## Or simply
-
-gomoji [search term] -a
+gomoji --all [search term]
 ```
 
 ## Examples
@@ -36,7 +32,7 @@ gomoji golf
 🏌 U+1F3CC :person_golfing:
 ⛳ U+26F3 :golf:
 
-gomoji golf -a
+gomoji --all golf
 
 🏌 U+1F3CC :person_golfing:
 🏌🏻 U+1F3CC U+1F3FB :person_golfing_tone1:

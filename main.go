@@ -7,8 +7,14 @@ import (
 	"github.com/destinio/gomoji/data"
 )
 
+func printAll(emojis *[]data.Emoji) {
+	for _, emoji := range *emojis {
+		fmt.Println(emoji.Emoji, emoji.Unicode, emoji.Shortcode)
+	}
+}
+
 func main() {
-	all := flag.String("all", "", "List all emojis")
+	all := flag.String("all", "", "This returns all emojis including genders and skin tones")
 
 	flag.Parse()
 
@@ -19,9 +25,8 @@ func main() {
 			return
 		}
 
-		for _, emoji := range emojis {
-			fmt.Println(emoji.Emoji, emoji.Unicode, emoji.Shortcode)
-		}
+		printAll(&emojis)
+
 	} else {
 		if len(flag.Args()) == 0 {
 			fmt.Println("Please provide a search term")
@@ -33,8 +38,6 @@ func main() {
 			fmt.Println(err)
 			return
 		}
-		for _, emoji := range emojis {
-			fmt.Println(emoji.Emoji, emoji.Unicode, emoji.Shortcode)
-		}
+		printAll(&emojis)
 	}
 }
