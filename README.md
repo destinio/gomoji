@@ -17,6 +17,7 @@ make install
 ```bash
 # Find all emojis that match the search term
 # This only return the default emoji
+# (Not all emojis have a default e.g. doctor)
 gomoji [search term]
 
 # Find all emojis that match the search term
@@ -54,3 +55,7 @@ gomoji --all golf
 🏌🏿‍♀️ U+1F3CC U+1F3FF U+200D U+2640 U+FE0F :woman_golfing_tone5:
 ⛳ U+26F3 :golf:
 ```
+
+## Coming Soon
+- [ ] Add support for configuring gender and skin tone
+- [ ] Add support for favorite emojis
