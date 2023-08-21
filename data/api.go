@@ -48,17 +48,27 @@ func GetEmojis() ([]Emoji, error) {
 	return emojis, nil
 }
 
-type Options struct {
-	All bool
-}
-
-func FindEmojisByTag(tag string, opts ...*Options) ([]Emoji, error) {
-	defaultAll := false
-
-	if len(opts) > 0 {
-		defaultAll = opts[0].All
+func FindEmojisByTagAll(tag string) ([]Emoji, error) {
+	emojis, err := GetEmojis()
+	if err != nil {
+		log.Fatal(err)
+		return nil, err
 	}
 
+	var foundEmojis []Emoji
+
+	for _, emoji := range emojis {
+		for _, emojitag := range emoji.Tags {
+			if emojitag == tag {
+				foundEmojis = append(foundEmojis, emoji)
+			}
+		}
+	}
+
+	return foundEmojis, nil
+}
+
+func FindEmojisByTagOnlyOne(tag string) ([]Emoji, error) {
 	emojis, err := GetEmojis()
 	if err != nil {
 		log.Fatal(err)
@@ -70,18 +80,10 @@ func FindEmojisByTag(tag string, opts ...*Options) ([]Emoji, error) {
 	for _, emoji := range emojis {
 		uniCount := len(strings.Split(emoji.Unicode, " "))
 
-		if defaultAll {
+		if uniCount == 1 {
 			for _, emojitag := range emoji.Tags {
 				if emojitag == tag {
 					foundEmojis = append(foundEmojis, emoji)
-				}
-			}
-		} else {
-			if uniCount == 1 {
-				for _, emojitag := range emoji.Tags {
-					if emojitag == tag {
-						foundEmojis = append(foundEmojis, emoji)
-					}
 				}
 			}
 		}

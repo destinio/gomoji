@@ -1,45 +1,40 @@
 package main
 
 import (
+	"flag"
 	"fmt"
-	"os"
-	"strings"
 
 	"github.com/destinio/gomoji/data"
 )
 
 func main() {
-	args := os.Args
+	all := flag.String("all", "", "List all emojis")
 
-	if len(args) < 2 {
-		fmt.Println("Please provide a search term")
-		return
-	}
+	flag.Parse()
 
-	input := os.Args[1]
+	if *all != "" {
+		emojis, err := data.FindEmojisByTagAll(*all)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 
-	var flag bool
-
-	if len(args) > 2 {
-		if args[2] == "-a" || args[2] == "--all" {
-			flag = true
+		for _, emoji := range emojis {
+			fmt.Println(emoji.Emoji, emoji.Unicode, emoji.Shortcode)
 		}
 	} else {
-		flag = false
-	}
-
-	emojis, err := data.FindEmojisByTag(strings.ToLower(input), &data.Options{All: flag})
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-
-	if len(emojis) == 0 {
-		fmt.Println("No emojis found")
-		return
-	}
-
-	for _, emoji := range emojis {
-		fmt.Println(emoji.Emoji, emoji.Unicode, emoji.Shortcode)
+		if len(flag.Args()) == 0 {
+			fmt.Println("Please provide a search term")
+			return
+		}
+		input := flag.Args()[0]
+		emojis, err := data.FindEmojisByTagOnlyOne(input)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		for _, emoji := range emojis {
+			fmt.Println(emoji.Emoji, emoji.Unicode, emoji.Shortcode)
+		}
 	}
 }
